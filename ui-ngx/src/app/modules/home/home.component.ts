@@ -52,7 +52,7 @@ export class HomeComponent extends PageComponent implements AfterViewInit, OnIni
   sidenavMode: 'over' | 'push' | 'side' = 'side';
   sidenavOpened = true;
 
-  logo = 'assets/logo_title_white.svg';
+  logo = 'assets/logo_title_white.png';
 
   @ViewChild('sidenav')
   sidenav: MatSidenav;
@@ -70,9 +70,9 @@ export class HomeComponent extends PageComponent implements AfterViewInit, OnIni
   private destroy$ = new Subject<void>();
 
   constructor(protected store: Store<AppState>,
-              @Inject(WINDOW) private window: Window,
-              private activeComponentService: ActiveComponentService,
-              private fb: FormBuilder,
+    @Inject(WINDOW) private window: Window,
+    private activeComponentService: ActiveComponentService,
+    private fb: FormBuilder,
               public breakpointObserver: BreakpointObserver) {
     super(store);
   }
@@ -87,13 +87,13 @@ export class HomeComponent extends PageComponent implements AfterViewInit, OnIni
       .observe(MediaBreakpoints['gt-sm'])
       .pipe(takeUntil(this.destroy$))
       .subscribe((state: BreakpointState) => {
-          if (state.matches) {
+        if (state.matches) {
             this.sidenavMode = 'side';
-            this.sidenavOpened = true;
-          } else {
+          this.sidenavOpened = true;
+        } else {
             this.sidenavMode = 'over';
-            this.sidenavOpened = false;
-          }
+          this.sidenavOpened = false;
+        }
         }
       );
   }
@@ -105,11 +105,11 @@ export class HomeComponent extends PageComponent implements AfterViewInit, OnIni
 
   ngAfterViewInit() {
     this.textSearch.valueChanges.pipe(
-      debounceTime(150),
+        debounceTime(150),
       startWith(''),
-      distinctUntilChanged((a: string, b: string) => a.trim() === b.trim()),
-      skip(1),
-      takeUntil(this.destroy$)
+        distinctUntilChanged((a: string, b: string) => a.trim() === b.trim()),
+        skip(1),
+        takeUntil(this.destroy$)
     ).subscribe(value => this.searchTextUpdated(value.trim()));
   }
 
