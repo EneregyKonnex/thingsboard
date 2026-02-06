@@ -148,3 +148,27 @@ To get support, please visit our [GitHub issues page](https://github.com/thingsb
 ## 📄 Licenses
 
 This project is released under [Apache 2.0 License](./LICENSE)
+
+## How to build all
+
+```
+mvn -T 0.8C license:format clean install -DskipTests -Ddockerfile.skip=false
+```
+
+## How to build only the Web UI only
+
+```bash
+mvn -T 0.8C license:format clean install -DskipTests -Ddockerfile.skip=false -pl :web-ui -am
+```
+
+## How to build tb-web-ui and tb-node only
+
+```bash
+mvn -e -T 0.8C license:format install -DskipTests -Ddockerfile.skip=false -pl :web-ui,:tb-node
+```
+
+## How to build tb-web-ui, tb-node, and tb-progres only
+
+```bash
+mvn -e -T 0.8C license:format install -DskipTests -Ddockerfile.skip=false -pl org.thingsboard.msa:web-ui,org.thingsboard.msa:tb-node,org.thingsboard.msa:tb
+```
